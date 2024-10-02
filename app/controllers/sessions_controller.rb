@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(user.id)
     else
       # ログイン失敗した場合
-      flash[:danger] = 'ログインに失敗しました'
+      flash[:danger] = 'メールアドレスまたはパスワードに誤りがあります'
       render :new
     end
   end

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       # ユーザ登録に成功した場合の処理
       log_in(@user)
-      flash[:notice] = t('flash.users.create') 
+      flash[:notice] = 'アカウントを登録しました' 
       redirect_to user_path(@user.id)
     else
       # ユーザ登録に失敗した場合の処理
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = t('flash.users.update') 
+      flash[:notice] = 'アカウントを更新しました'
       redirect_to user_path(@user)
     else
       render :edit
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy 
-    flash[:notice] = t('flash.users.destroy') 
+    flash[:notice] = 'アカウントを削除しました'
     redirect_to root_path
   end
 
