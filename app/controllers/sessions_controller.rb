@@ -8,19 +8,19 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       # ログイン成功した場合
-      flash[:notice] = 'ログインしました'
+      flash[:notice] = t('flash.sessions.create_success')
       log_in(user)
       redirect_to user_path(user.id)
     else
       # ログイン失敗した場合
-      flash[:danger] = 'メールアドレスまたはパスワードに誤りがあります'
+      flash[:danger] = t('flash.sessions.create_failure')
       render :new
     end
   end
 
   def destroy
     session.delete(:user_id)
-    flash[:notice] = 'ログアウトしました'
+    flash[:notice] = t('flash.sessions.destroy')
     redirect_to new_session_path
   end
 
