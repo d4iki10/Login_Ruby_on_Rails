@@ -13,11 +13,12 @@
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
+
     <header>
       <nav>
         <% if logged_in? %>
-          <%= link_to "タスク一覧", tasks_path(@task), id: "tasks-index" %>
-          <%= link_to "タスクを登録する", new_task_path(@task), id: "new-task" %>
+          <%= link_to "タスク一覧", tasks_path, id: "tasks-index" %>
+          <%= link_to "タスクを登録する", new_task_path, id: "new-task" %>
           <%= link_to "アカウント", user_path(current_user), id: "my-account" %>
           <%= link_to "ログアウト", session_path(current_user), method: :delete, id: "sign-out" %>
         <% else %>
@@ -26,6 +27,7 @@
         <% end %>
       </nav>
     </header>
+
     <%= yield %>
   </body>
 </html>

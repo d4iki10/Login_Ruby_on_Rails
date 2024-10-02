@@ -2,15 +2,16 @@ class SessionsController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
 
   def new
+    @user = User.new
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    @user = User.find_by(email: params[:session][:email].downcase)
+    if @user && @user.authenticate(params[:session][:password])
       # ログイン成功した場合
       flash[:notice] = t('flash.sessions.create_success')
-      log_in(user)
-      redirect_to user_path(user.id)
+      log_in(@user)
+      redirect_to tasks_path
     else
       # ログイン失敗した場合
       flash[:danger] = t('flash.sessions.create_failure')
